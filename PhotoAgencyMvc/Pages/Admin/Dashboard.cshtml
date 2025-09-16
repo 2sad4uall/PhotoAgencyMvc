@@ -1,0 +1,52 @@
+﻿@page
+@model AdminDashboardModel
+
+@{
+    ViewData["Title"] = "Дашборд админа";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Дашборд админа</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Управление услугами</h5>
+                    <a href="/Services" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Управление фотографами</h5>
+                    <a href="/Photographers" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Управление заказами</h5>
+                    <a href="/Orders" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Отзывы</h5>
+                    <a href="/Reviews" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Платежи</h5>
+                    <a href="/Payments" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

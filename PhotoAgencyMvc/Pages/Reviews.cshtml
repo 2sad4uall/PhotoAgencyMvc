@@ -1,0 +1,25 @@
+﻿@page
+@model ReviewsModel
+
+@{
+    ViewData["Title"] = "Отзывы";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Список отзывов</h2>
+    <div class="row">
+        @foreach (var review in Model.Reviews)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Отзыв #@review.Id</h5>
+                        <p class="card-text">Рейтинг: @review.Rating</p>
+                        <p class="card-text">Комментарий: @review.Comment</p>
+                        <p class="card-text">Дата: @review.ReviewDate</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

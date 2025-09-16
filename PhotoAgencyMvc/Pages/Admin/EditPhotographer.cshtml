@@ -1,0 +1,41 @@
+﻿@page "{id:int}"
+@model EditPhotographerModel
+
+@{
+    ViewData["Title"] = "Редактирование фотографа";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Редактирование фотографа</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="form-group mb-3">
+                            <label asp-for="Photographer.FullName" class="form-label">Имя</label>
+                            <input asp-for="Photographer.FullName" class="form-control" />
+                            <span asp-validation-for="Photographer.FullName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Photographer.Phone" class="form-label">Телефон</label>
+                            <input asp-for="Photographer.Phone" class="form-control" />
+                            <span asp-validation-for="Photographer.Phone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Photographer.Bio" class="form-label">Био</label>
+                            <textarea asp-for="Photographer.Bio" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="Photographer.Bio" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="PhotoFile" class="form-label">Фото</label>
+                            <input type="file" asp-for="PhotoFile" class="form-control" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <a asp-page="/Photographers" class="btn btn-secondary">Отмена</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

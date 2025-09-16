@@ -1,0 +1,25 @@
+﻿@page
+@model PaymentsModel
+
+@{
+    ViewData["Title"] = "Платежи";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Список платежей</h2>
+    <div class="row">
+        @foreach (var payment in Model.Payments)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Платёж #@payment.Id</h5>
+                        <p class="card-text">Сумма: @payment.Amount</p>
+                        <p class="card-text">Дата: @payment.PaymentDate</p>
+                        <p class="card-text">Метод: @payment.PaymentMethod</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

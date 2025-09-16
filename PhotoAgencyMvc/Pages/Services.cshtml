@@ -1,0 +1,28 @@
+﻿@page
+@model ServicesModel
+
+@{
+    ViewData["Title"] = "Услуги";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Список услуг</h2>
+    <div class="row">
+        @foreach (var service in Model.Services)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@service.Name</h5>
+                        <p class="card-text">@service.Description</p>
+                        <p class="card-text">Цена: @service.Price</p>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a href="/Admin/EditService/@service.Id" class="btn btn-primary">Редактировать</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

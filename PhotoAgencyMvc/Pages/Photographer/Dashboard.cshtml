@@ -1,0 +1,36 @@
+﻿@page
+@model PhotographerDashboardModel
+
+@{
+    ViewData["Title"] = "Дашборд фотографа";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Дашборд фотографа</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Мои услуги</h5>
+                    <a href="/Services" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Мои заказы</h5>
+                    <a href="/Orders" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Отзывы</h5>
+                    <a href="/Reviews" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
