@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 
 namespace PhotoAgencyMvc.Models;
@@ -13,11 +14,11 @@ public partial class Order
 
     public DateTime OrderDate { get; set; }
 
-    public string Status { get; set; } = null!;
-
-    public virtual Client Client { get; set; } = null!;
+    public string Status { get; set; } 
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-    public virtual Service Service { get; set; } = null!;
+    public Client Client { get; set; }
+    public Service Service { get; set; }
+     
 }

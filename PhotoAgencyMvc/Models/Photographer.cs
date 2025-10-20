@@ -15,7 +15,7 @@ public partial class Photographer
 
     public string? Bio { get; set; }
 
-    public string? Photo { get; set; }
+    public byte[] Photo { get; set; }
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 

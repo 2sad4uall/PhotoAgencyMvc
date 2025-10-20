@@ -1,0 +1,54 @@
+﻿@page "{id:int}"
+@model CreateModel
+
+@{
+    ViewData["Title"] = "Создание заказа";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Создание заказа</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <form method="post">
+                        <input type="hidden" asp-for="Order.ServiceId" />
+                        <input type="hidden" asp-for="Order.ClientId" />
+                        <div class="form-group mb-3">
+                            <label class="form-label">Имя клиента</label>
+                            <input value="@ViewData["ClientFullName"]" class="form-control" readonly />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Название услуги</label>
+                            <input value="@ViewData["ServiceName"]" class="form-control" readonly />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.OrderDate" class="form-label">Дата заказа</label>
+                            <input asp-for="Order.OrderDate" class="form-control" readonly />
+                            <span asp-validation-for="Order.OrderDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Order.Status" class="form-label">Статус</label>
+                            <input asp-for="Order.Status" class="form-control" readonly />
+                            <span asp-validation-for="Order.Status" class="text-danger"></span>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success">Подтвердить заказ</button>
+                        <a asp-page="/Services" class="btn btn-secondary">Отмена</a>
+                    </form>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="text-danger mt-3">
+                            <ul>
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

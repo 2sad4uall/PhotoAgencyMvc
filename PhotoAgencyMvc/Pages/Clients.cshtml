@@ -1,0 +1,24 @@
+﻿@page
+@model ClientsModel
+
+@{
+    ViewData["Title"] = "Клиенты";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Список клиентов</h2>
+    <div class="row">
+        @foreach (var client in Model.Clients)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@client.FullName</h5>
+                        <p class="card-text">Телефон: @client.Phone</p>
+                        <p class="card-text">Адрес: @client.Address</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

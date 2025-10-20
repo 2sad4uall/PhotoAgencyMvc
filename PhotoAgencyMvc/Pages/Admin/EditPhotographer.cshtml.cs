@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using PhotoAgencyMvc.Models;
+using System.Threading.Tasks;
 
 [Authorize(Roles = "Admin")]
 public class EditPhotographerModel : PageModel
@@ -37,17 +38,36 @@ public class EditPhotographerModel : PageModel
             return Page();
         }
 
+        var photographerToUpdate = await _context.Photographers.FindAsync(Photographer.Id);
+        if (photographerToUpdate == null)
+        {
+            return NotFound();
+        }
+        photographerToUpdate.UserId = photographerToUpdate.UserId;
+        photographerToUpdate.FullName = Photographer.FullName;
+        photographerToUpdate.Phone = Photographer.Phone;
+        photographerToUpdate.Bio = Photographer.Bio;
+
+        // Обработка нового фото, если оно загружено
         if (PhotoFile != null)
         {
             using (var memoryStream = new MemoryStream())
             {
                 await PhotoFile.CopyToAsync(memoryStream);
-                Photographer.Photo = Convert.ToBase64String(memoryStream.ToArray());
+                photographerToUpdate.Photo = memoryStream.ToArray(); 
             }
         }
 
-        _context.Attach(Photographer).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-        return RedirectToPage("/Photographers");
+        try
+        {
+            _context.Photographers.Update(photographerToUpdate);
+            await _context.SaveChangesAsync();
+            return RedirectToPage("/Photographers");
+        }
+        catch (DbUpdateException ex)
+        {
+            ModelState.AddModelError(string.Empty, $"Ошибка при сохранении: {ex.InnerException?.Message ?? ex.Message}");
+            return Page();
+        }
     }
 }

@@ -1,0 +1,74 @@
+﻿@page
+@model ProfileModel
+
+@{
+    ViewData["Title"] = "Мой профиль";
+}
+
+<h2 class="text-center mb-4">Мой профиль</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <form method="post">
+                        @if (Model.UserRole == "Client")
+                        {
+                            <div class="form-group mb-3">
+                                <label asp-for="ClientProfile.FullName" class="form-label">Имя</label>
+                                <input asp-for="ClientProfile.FullName" class="form-control" />
+                                <span asp-validation-for="ClientProfile.FullName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="ClientProfile.Phone" class="form-label">Телефон</label>
+                                <input asp-for="ClientProfile.Phone" class="form-control" />
+                                <span asp-validation-for="ClientProfile.Phone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="ClientProfile.Address" class="form-label">Адрес</label>
+                                <input asp-for="ClientProfile.Address" class="form-control" />
+                                <span asp-validation-for="ClientProfile.Address" class="text-danger"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group mb-3">
+                                <label asp-for="PhotographerProfile.FullName" class="form-label">Имя</label>
+                                <input asp-for="PhotographerProfile.FullName" class="form-control" />
+                                <span asp-validation-for="PhotographerProfile.FullName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="PhotographerProfile.Phone" class="form-label">Телефон</label>
+                                <input asp-for="PhotographerProfile.Phone" class="form-control" />
+                                <span asp-validation-for="PhotographerProfile.Phone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="PhotographerProfile.Bio" class="form-label">Биография</label>
+                                <textarea asp-for="PhotographerProfile.Bio" class="form-control"></textarea>
+                                <span asp-validation-for="PhotographerProfile.Bio" class="text-danger"></span>
+                            </div>
+                        }
+                        <button type="submit" class="btn btn-success">Сохранить изменения</button>
+                        <a asp-page="/Index" class="btn btn-secondary">Назад</a>
+                    </form>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="text-danger mt-3">
+                            <ul>
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

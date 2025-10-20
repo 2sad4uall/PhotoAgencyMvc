@@ -1,29 +1,32 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PhotoAgencyMvc.Models;
 
-[Authorize(Roles = "Admin, Photographer")]
-public class EditServiceModel : PageModel
+[Authorize(Roles = "Admin")]
+public class EditOrderModel : PageModel
 {
     private readonly PhotoAgencyContext _context;
 
-    public EditServiceModel(PhotoAgencyContext context)
+    public EditOrderModel(PhotoAgencyContext context)
     {
         _context = context;
     }
 
     [BindProperty]
-    public Service Service { get; set; }
+    public Order Order { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
-        Service = await _context.Services.FindAsync(id);
-        if (Service == null)
+        Order = await _context.Orders.FindAsync(id);
+        if (Order == null)
         {
             return NotFound();
         }
+        ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "FullName");
+        ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name");
         return Page();
     }
 
@@ -34,8 +37,8 @@ public class EditServiceModel : PageModel
             return Page();
         }
 
-        _context.Attach(Service).State = EntityState.Modified;
+        _context.Attach(Order).State = EntityState.Modified;
         await _context.SaveChangesAsync();
-        return RedirectToPage("/Services");
+        return RedirectToPage("/Orders");
     }
 }

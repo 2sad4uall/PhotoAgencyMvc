@@ -1,32 +1,27 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using PhotoAgencyMvc.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<PhotoAgencyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<PhotoAgencyContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login";
+        options.LogoutPath = "/Logout";
+        options.AccessDeniedPath = "/AccessDenied";
+        options.Cookie.Name = ".PhotoAgency.Auth";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    });
 
-builder.Services.AddRazorPages();
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication();
+builder.Services.AddRazorPages();
 builder.Services.AddSession();
 
 var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-else
-{
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
-}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

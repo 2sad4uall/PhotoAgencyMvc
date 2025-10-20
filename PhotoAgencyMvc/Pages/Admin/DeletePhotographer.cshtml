@@ -1,0 +1,25 @@
+﻿@page "{id:int}"
+@model DeletePhotographerModel
+
+@{
+    ViewData["Title"] = "Удаление фотографа";
+}
+
+<h2 class="text-center mb-4">Удаление фотографа</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h4>Вы уверены, что хотите удалить фотографа "@Model.Photographer.FullName"?</h4>
+                    <form method="post">
+                        <input type="hidden" asp-for="Photographer.Id" />
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                        <a asp-page="/Photographers" class="btn btn-secondary">Отмена</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

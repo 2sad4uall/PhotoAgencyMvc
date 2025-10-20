@@ -1,14 +1,20 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿namespace PhotoAgencyMvc.Models;
 
-namespace PhotoAgencyMvc.Models;
-
-public class User : IdentityUser<int>  
+public class User
 {
-    public int RoleId { get; set; }  
+    public int Id { get; set; }
 
-    public virtual Client? Client { get; set; }
+    public string Username { get; set; } = null!;  
 
-    public virtual Photographer? Photographer { get; set; }
+    public string Password { get; set; } = null!;
 
-    public virtual Role Role { get; set; } = null!;
+    public string Email { get; set; } = null!;
+
+    public int RoleId { get; set; }
+
+    public virtual Role Role { get; set; }
+
+    public virtual Client Client { get; set; }  
+
+    public virtual Photographer Photographer { get; set; }  
 }

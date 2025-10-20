@@ -1,0 +1,58 @@
+﻿@page
+@model RegisterModel
+
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4">Регистрация</h3>
+                    <form method="post">
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.Username" class="form-label">Логин</label>
+                            <input asp-for="Input.Username" class="form-control" />
+                            <span asp-validation-for="Input.Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.Password" class="form-label">Пароль</label>
+                            <input asp-for="Input.Password" class="form-control" type="password" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.Email" class="form-label">Email</label>
+                            <input asp-for="Input.Email" class="form-control" type="email" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.FullName" class="form-label">Имя</label>
+                            <input asp-for="Input.FullName" class="form-control" />
+                            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.Phone" class="form-label">Телефон</label>
+                            <input asp-for="Input.Phone" class="form-control" />
+                            <span asp-validation-for="Input.Phone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.Address" class="form-label">Адрес</label>
+                            <input asp-for="Input.Address" class="form-control" />
+                            <span asp-validation-for="Input.Address" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+                    </form>
+                    <p class="text-center mt-3">
+                        <a asp-page="./Login">Вход</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

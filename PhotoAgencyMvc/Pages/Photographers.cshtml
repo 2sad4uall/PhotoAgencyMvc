@@ -8,17 +8,25 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Список фотографов</h2>
     <div class="row">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="col-12 mb-3 text-end">
+                <a asp-page="/Admin/CreatePhotographer" class="btn btn-primary">Добавить фотографа</a>
+            </div>
+        }
+        
         @foreach (var photographer in Model.Photographers)
         {
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img src="data:image/png;base64,@photographer.Photo" class="card-img-top" alt="Фото" style="height: 200px; object-fit: cover;">
+                    <img src="@photographer.Photo" class="card-img-top mb-3" alt="Фото  " style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">@photographer.FullName</h5>
                         <p class="card-text">@photographer.Bio</p>
                         @if (User.IsInRole("Admin"))
                         {
                             <a href="/Admin/EditPhotographer/@photographer.Id" class="btn btn-primary">Редактировать</a>
+                            <a href="/Admin/DeletePhotographer/@photographer.Id" class="btn btn-danger">Удалить</a>
                         }
                     </div>
                 </div>

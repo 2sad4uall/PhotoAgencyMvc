@@ -7,18 +7,43 @@
 
 <div class="container mt-5">
     <h2 class="text-center mb-4">Список услуг</h2>
+    @if (User.IsInRole("Photographer"))
+    {
+        <div class="col-12 mb-3 text-end">
+            <a asp-page="/Photographer/CreateService" class="btn btn-primary">Добавить услугу</a>
+        </div>
+    }
+    <form asp-action="Index" method="get" class="mb-4">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" name="searchString" value="@Model.CurrentFilter" class="form-control" placeholder="Поиск по названию..." />
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary">Поиск</button>
+            </div>
+        </div>
+    </form>
     <div class="row">
+        <div class="mb-3">
+            <a asp-page="Services" asp-route-sortOrder="@Model.NameSortParm" asp-route-searchString="@Model.CurrentFilter">Сортировать по названию</a>
+            <a asp-page="Services" asp-route-sortOrder="@Model.PriceSortParm" asp-route-searchString="@Model.CurrentFilter">Сортировать по цене</a>
+        </div>
         @foreach (var service in Model.Services)
         {
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">@service.Name</h5>
-                        <p class="card-text">@service.Description</p>
                         <p class="card-text">Цена: @service.Price</p>
-                        @if (User.IsInRole("Admin"))
+                        <p class="card-text"><strong>Фотограф:</strong> @service.Photographer?.FullName</p>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Photographer"))
                         {
-                            <a href="/Admin/EditService/@service.Id" class="btn btn-primary">Редактировать</a>
+                            <a href="/Admin/EditService/@service.Id" class="btn btn-secondary">Редактировать</a>
+                            <a href="/Admin/DeleteService/@service.Id" class="btn btn-danger">Удалить</a>
+                        }
+                        @if (User.IsInRole("Client"))
+                        {
+                            <a href="/OrdersFolder/Create/@service.Id" class="btn btn-primary">Заказать</a>
                         }
                     </div>
                 </div>
