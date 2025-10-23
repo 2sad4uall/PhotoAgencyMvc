@@ -18,6 +18,9 @@
                         <p class="card-text">Статус: @order.Status</p>
                         <p class="card-text">Услуга: @order.Service.Name</p>
                         <p class="card-text">Клиент: @order.Client.FullName</p>
+                        <p class="card-text">Номер: @order.Client.Phone</p>
+                        <p class="card-text">Почта: @order.Client.User.Email</p>
+                        <p class="card-text">Фотограф: @order.Service.Photographer.FullName</p>
                         @if (User.IsInRole("Admin"))
                         {
                             <a href="/OrdersFolder/Edit/@order.Id" class="btn btn-primary">Редактировать</a>

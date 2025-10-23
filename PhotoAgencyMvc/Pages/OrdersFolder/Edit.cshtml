@@ -18,6 +18,11 @@
                             <span asp-validation-for="Order.ClientId" class="text-danger"></span>
                         </div>
                         <div class="form-group mb-3">
+                            <label asp-for="Order.Service.PhotographerId" class="form-label">Фотограф</label>
+                            <select asp-for="Order.Service.PhotographerId" class="form-control" asp-items="ViewBag.PhotographerId"></select>
+                            <span asp-validation-for="Order.Service.PhotographerId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
                             <label asp-for="Order.ServiceId" class="form-label">Услуга</label>
                             <select asp-for="Order.ServiceId" class="form-control" asp-items="ViewBag.ServiceId"></select>
                             <span asp-validation-for="Order.ServiceId" class="text-danger"></span>

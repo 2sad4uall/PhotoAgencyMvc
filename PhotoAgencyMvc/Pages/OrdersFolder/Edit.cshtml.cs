@@ -26,6 +26,7 @@ public class EditOrderModel : PageModel
             return NotFound();
         }
         ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "FullName");
+        ViewData["PhotographerId"] = new SelectList(_context.Photographers, "Id", "FullName");
         ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Name");
         return Page();
     }

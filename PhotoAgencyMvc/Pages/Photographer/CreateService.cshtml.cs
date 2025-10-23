@@ -58,7 +58,7 @@ public class CreateServiceModel : PageModel
             return NotFound("Фотограф не найден.");
         }
 
-        Service.PhotographerId = photographer.Id; // Убедимся, что PhotographerId установлен
+        Service.PhotographerId = photographer.Id; 
 
         _context.Services.Add(Service);
         await _context.SaveChangesAsync();

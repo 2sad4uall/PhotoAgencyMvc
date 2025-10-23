@@ -20,9 +20,9 @@ public class OrdersModel : PageModel
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var photographer =  await _context.Photographers.FirstOrDefaultAsync(p => p.UserId.ToString() == userId); 
-        if (User.IsInRole("Client") || User.IsInRole("Admin") )
-            Orders = await _context.Orders.Include(o => o.Client).Include(o => o.Service).ToListAsync();
+        if (User.IsInRole("Admin") )
+            Orders = await _context.Orders.Include(o => o.Client).Include(o => o.Service).Include(o => o.Service.Photographer).Include(o => o.Client.User).ToListAsync();
         else
-            Orders = await _context.Orders.Include(o => o.Client).Include(o => o.Service).Where(o => o.Service.PhotographerId == photographer.Id).ToListAsync();
+            Orders = await _context.Orders.Include(o => o.Client).Include(o => o.Service).Include(o => o.Client.User).Include(o => o.Service.Photographer).Where(o => o.Service.PhotographerId == photographer.Id).ToListAsync();
     }
 }
